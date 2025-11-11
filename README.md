@@ -1,8 +1,8 @@
-# 📁 README: Project 1 - Real-Time Equity Risk & P&L Dashboard
+# Real-Time Equity Risk & P&L Dashboard
 
-This project demonstrates a full-stack, real-time quantitative application built using **FastAPI** (Python backend) and **Angular** (Frontend), showcasing expertise in **WebSockets, Pandas/NumPy for quantitative finance, and local database integration (SQLite)**.
+This project demonstrates a full-stack, real-time application built using **FastAPI** (Python backend) and **Angular** (Frontend), showcasing **WebSockets, Pandas/NumPy for quantitative finance, and local database integration (SQLite)**.
 
-## 🌟 Project Goals
+## Project Goals
 
 * Build a **real-time risk dashboard** for equity positions.
 * Implement **Mark-to-Market (MtM) P&L** calculation.
@@ -22,9 +22,9 @@ This project demonstrates a full-stack, real-time quantitative application built
 
 ---
 
-## 🚀 Setup and Run Instructions
+## Setup and Run Instructions
 
-### 1. Backend Setup (`quant_dashboard/`)
+## 1. Backend Setup
 
 1.  **Install Dependencies:**
     ```bash
@@ -54,12 +54,3 @@ This project demonstrates a full-stack, real-time quantitative application built
     *The dashboard opens in your browser, typically at **`http://localhost:4200`**, displaying real-time data from the WebSocket stream.*
 
 ---
-
-## 📝 Key Files and Logic
-
-| File | Description | Skill Demonstrated |
-| :--- | :--- | :--- |
-| `app/main.py` | FastAPI setup, REST endpoints, **WebSocket Manager**, and the background **Market Data Simulator**. | Concurrency, WebSockets, API Design |
-| `app/quant_engine.py` | Contains the `calculate_pnl_and_var` function, using NumPy to calculate **Historical 95% VaR**. | Quantitative Development (VaR) |
-| `app/database.py` | SQLAlchemy setup for SQLite, demonstrating database connection resilience. | Database Integration |
-| `app/app.component.ts` | Angular component that subscribes to the WebSocket stream and uses a `Map` to efficiently update the state. | Real-time UI, RxJS, Change Detection |

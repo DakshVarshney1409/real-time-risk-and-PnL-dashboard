@@ -1,0 +1,4 @@
+.venv
+quant_dashboard.quant_dashboard
+__pycache__
+.vscode

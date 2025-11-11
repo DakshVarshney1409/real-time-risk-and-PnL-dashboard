@@ -24,7 +24,6 @@ class ConnectionManager:
 
     async def broadcast(self, message: str):
         for connection in self.active_connections:
-            # We use try/except to handle clients that might disconnect mid-broadcast
             try:
                 await connection.send_text(message)
             except Exception:
@@ -62,26 +61,20 @@ async def websocket_endpoint(websocket: WebSocket):
     await manager.connect(websocket)
     try:
         while True:
-            # Keep the connection alive, client can send messages if needed
-            # For this project, we primarily send data from the server.
             await websocket.receive_text()
     except WebSocketDisconnect:
         manager.disconnect(websocket)
         print(f"Client disconnected: {websocket.client}")
 
 
-# --- Background Task (Simulate Real-Time Price Updates) ---
 async def market_data_simulator():
     """A background task that simulates real-time price changes and broadcasts them."""
     while True:
-        # 1. Fetch all symbols we care about
         with get_db() as db:
             symbols = [p.symbol for p in db.query(Position.symbol).all()]
 
-        # 2. Generate and broadcast a random price update
         if symbols:
             symbol = random.choice(symbols)
-            # Simulate a small random price fluctuation around $100-$200
             price_change = random.uniform(-0.5, 0.5)
             new_price = round(db.query(Position.market_price).filter(Position.symbol == symbol).first()[0] + price_change, 2)
             
@@ -91,15 +84,11 @@ async def market_data_simulator():
                 "timestamp": datetime.now().isoformat()
             }
             
-            # Send data to all connected clients
             await manager.broadcast(json.dumps(update_data))
 
-            # Update the DB (this is where the quant calculation logic would typically run)
             with get_db() as db_update:
                 position_to_update = db_update.query(Position).filter(Position.symbol == symbol).first()
                 if position_to_update:
-                    # In a real system, a separate quant service would calculate PnL/VaR
-                    # For now, we update the price directly.
                     position_to_update.market_price = new_price
                     db_update.commit()
 
@@ -110,5 +99,3 @@ async def market_data_simulator():
 async def startup_event():
     """Start the background simulator on FastAPI startup."""
     asyncio.create_task(market_data_simulator())
-
-# To run the app: uvicorn app.main:app --reload
