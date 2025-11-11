@@ -18,7 +18,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private http: HttpClient,
-    public wsService: WebSocketService // Made public for status check in template
+    public wsService: WebSocketService
   ) {}
 
   ngOnInit(): void {

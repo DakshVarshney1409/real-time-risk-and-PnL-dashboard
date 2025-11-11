@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
 export interface MarketData {
   symbol: string;
   price: number;
-  pnl: number;           // P&L update
-  var: number;           // VaR update
+  pnl: number;           
+  var: number;           
 }
 
 @Injectable({
@@ -15,7 +15,7 @@ export interface MarketData {
 })
 export class WebSocketService {
   private marketDataUrl = 'ws://localhost:8000/ws/market_data';
-  public socket$: WebSocketSubject<MarketData>; // Make public for status check in template
+  public socket$: WebSocketSubject<MarketData>;
 
   constructor() {
     this.connect();
