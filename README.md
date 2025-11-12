@@ -10,7 +10,7 @@ This project demonstrates a full-stack, real-time application built using **Fast
 * Utilize **WebSockets** for low-latency market data streaming.
 * Establish **REST APIs** for initial data fetching.
 
-## ⚙️ Technology Stack
+## Technology Stack
 
 | Component | Technology | Role |
 | :--- | :--- | :--- |
